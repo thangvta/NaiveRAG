@@ -8,7 +8,7 @@ class SelfRAG(ModularRAG):
     def __init__(self):
         super().__init__()
         self.Settings.embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-small-en-v1.5")
-        self.download_model()
+        
 
     def processing(self, file_path):
         print('Loading documents')
@@ -29,13 +29,13 @@ class SelfRAG(ModularRAG):
         
     def create_query_engine(self):
         from pathlib import Path
-        download_dir = "/model"
-        model_path = str(Path(download_dir)) / "selfrag_llama2_7b.q4_k_m.gguf"
+        download_dir = "model"
+        model_path = Path(download_dir) / "selfrag_llama2_7b.q4_k_m.gguf"
         self.query_engine = SelfRAGQueryEngine(model_path, self.retriever, verbose=True)
 
     def download_model(self):
         import subprocess
-        download_dir = "/model"
+        download_dir = "model"
         subprocess.run("pip install -q huggingface-hub", shell=True, check=True)
-        subprocess.run("huggingface-cli download m4r1/selfrag_llama2_7b-GGUF selfrag_llama2_7b.q4_k_m.gguf --local-dir '/model' --local-dir-use-symlinks False", shell=True, check=True)
-
+        # subprocess.run("huggingface-cli download m4r1/selfrag_llama2_7b-GGUF selfrag_llama2_7b.q4_k_m.gguf --local-dir 'model' --local-dir-use-symlinks False", shell=True, check=True)
+        subprocess.run("huggingface-cli download m4r1/selfrag_llama2_7b-GGUF selfrag_llama2_7b.q4_k_m.gguf --local-dir 'model' --local-dir-use-symlinks False", shell=True, check=True)
