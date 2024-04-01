@@ -67,6 +67,10 @@ class NaiveRAG:
 
 
     def create_index(self):
+        if self.vector_store is not None:
+            storage_context = StorageContext.from_defaults(vector_store=self.vector_store, docstore=self.doc_store)
+        else:
+            print('Pls check vector store status')
         nodes = self.create_nodes()
         self.index = VectorStoreIndex(
                 nodes,
@@ -75,12 +79,6 @@ class NaiveRAG:
     
 
     def create_query_engine(self):
-        if self.vector_store is not None:
-            storage_context = StorageContext.from_defaults(vector_store=self.vector_store, docstore=self.doc_store)
-        else:
-            print('Pls check vector store status')
-
-        
         self.query_engine = self.index.as_query_engine()
 
     def query(self, user_input):

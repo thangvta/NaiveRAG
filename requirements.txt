@@ -9,3 +9,4 @@ matplotlib
 weaviate-client
 ragas
 llama-index-packs-corrective-rag
+llama-index-packs-self-rag
