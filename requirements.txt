@@ -2,6 +2,7 @@ llama-index
 llama-index-llms-openai
 llama-index-llms-gemini
 llama-index-embeddings-gemini
+llama-index-embeddings-openai
 google-generativeai
 llama-index-vector-stores-weaviate
 python-dotenv
@@ -10,3 +11,6 @@ weaviate-client
 ragas
 llama-index-packs-corrective-rag
 llama-index-packs-self-rag
+llama-index-tools-tavily-research
+llama-index-readers-file
+llama-index-embeddings-huggingface

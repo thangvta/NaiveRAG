@@ -27,9 +27,10 @@ class SelfRAG(ModularRAG):
             similarity_top_k=10,
         )
         
-    def create_query_engine(self, model_path):
+    def create_query_engine(self):
         from pathlib import Path
-        download_dir = None
+        self.download_model()
+        download_dir = "/model"
         model_path = str(Path(download_dir)) / "selfrag_llama2_7b.q4_k_m.gguf"
         self.query_engine = SelfRAGQueryEngine(model_path, self.retriever, verbose=True)
 
@@ -37,6 +38,5 @@ class SelfRAG(ModularRAG):
         import subprocess
         download_dir = "/model"
         subprocess.run("pip install -q huggingface-hub", shell=True, check=True)
-        subprocess.run(f"pip huggingface-cli download m4r1/selfrag_llama2_7b-GGUF selfrag_llama2_7b.q4_k_m.gguf --local-dir {download_dir} --local-dir-use-symlinks False
- -q huggingface-hub", shell=True, check=True)
+        subprocess.run("huggingface-cli download m4r1/selfrag_llama2_7b-GGUF selfrag_llama2_7b.q4_k_m.gguf --local-dir '/model' --local-dir-use-symlinks False -q huggingface-hub", shell=True, check=True)
 
