@@ -15,6 +15,7 @@ class ModularRAG(NaiveRAG):
         super().__init__()
         self.node_parser = self.set_node_parser(node_parser)
         
+        
     
     def connect_weaviate(self, mode='local', api_key_provider:str=None):
         if mode == 'local':
@@ -25,6 +26,7 @@ class ModularRAG(NaiveRAG):
                         "X-Google-Api-Key": os.getenv("GOOGLE_API_KEY") 
                     }
                 )
+                return client
             elif api_key_provider=="OpenAI":
                 client = weaviate.Client(
                     url = "http://localhost:8080", 
@@ -32,6 +34,7 @@ class ModularRAG(NaiveRAG):
                         "X-OpenAI-Api-Key": os.getenv("OPENAI_API_KEY") 
                     }
                 )
+                return client
             elif api_key_provider not in {"Google", "OpenAI"}:
                 raise ValueError("API key type must be 'Google' or 'OpenAI'.")
             

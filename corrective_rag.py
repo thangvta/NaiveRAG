@@ -1,5 +1,4 @@
 from modular_rag import ModularRAG
-from llama_index.core.retrievers import VectorIndexRetriever
 from llama_index.packs.corrective_rag import CorrectiveRAGPack
 import os
 
@@ -9,6 +8,7 @@ class CorrectiveRAG(ModularRAG):
         
     
     def processing(self, file_path):
+        self.load_document()
         tavily_ai_api_key = os.environ["TAVILY_API_KEY"]
         self.corrective_rag_pack = CorrectiveRAGPack(
             self.documents, 
